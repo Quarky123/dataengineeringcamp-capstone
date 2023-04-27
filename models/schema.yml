@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_stocks
+    columns:
+      - name: symbol
+        description: Stock symbol
+        tests:
+          - unique
+          - not_null
+      - name: company_name
+        description: Company name
+
+  - name: fact_stock_daily_data
+    columns:
+      - name: symbol
+        description: Stock symbol
+        tests:
+          - not_null
+      - name: DAILY_LOW
+        description: Daily low price
+      - name: DAILY_HIGH
+        description: Daily high price
+      - name: DAILY_OPEN
+        description: Daily open price
+      - name: DAILY_CLOSE
+        description: Daily close price
+      - name: DAILY_VOLUME
+        description: Daily trading volume
