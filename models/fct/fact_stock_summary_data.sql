@@ -4,9 +4,9 @@ WITH stock_data AS (
   SELECT
     symbol,
     DATE_TRUNC('month', date) AS month,
-    AVG((high + low) / 2) AS avg_price,
-    SUM(volume) AS total_volume
-  FROM fact_stock_daily_data
+    AVG((daily_high + daily_low) / 2) AS avg_price,
+    SUM(daily_volume) AS total_volume
+  FROM {{ ref('fact_stock_daily_data') }}
   GROUP BY symbol, DATE_TRUNC('month', date)
 )
 
