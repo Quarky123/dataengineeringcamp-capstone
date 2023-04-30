@@ -1,7 +1,6 @@
-repositories:
-  - name: dbt-labs
-    url: https://packages.getdbt.com/dbt-labs/
-    
 packages:
-  - package: dbt-labs/dbt-utils
-    version: 0.8.1
+  - package: dbt-labs/dbt_utils
+    version: 1.0.0
+
+
+
