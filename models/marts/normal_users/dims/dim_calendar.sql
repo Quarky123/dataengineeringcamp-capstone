@@ -1,11 +1,11 @@
 WITH RECURSIVE rec_cte AS (
     -- start date
-    SELECT MIN(date) AS dt FROM {{ ref('fact_stock_daily_data') }}
+    SELECT MIN(date) AS dt FROM {{ ref('dim_stock_daily_data') }}
     UNION ALL
     SELECT DATEADD('day',1,dt) as dt
     FROM rec_cte
     -- end date (inclusive)
-    WHERE dt <  (SELECT MAX(date) FROM {{ ref('fact_stock_daily_data') }})
+    WHERE dt <  (SELECT MAX(date) FROM {{ ref('dim_stock_daily_data') }})
 )
 
 SELECT
