@@ -19,7 +19,7 @@ stock_data AS (
 SELECT
     stock_data.date,
     calendar.date_key,
-    stock_data.id
+    stock_data.id as stock_id
 FROM stock_data
 JOIN calendar
-  ON stock_data.date = calendar.date;
+  ON stock_data.date = calendar.date
