@@ -50,5 +50,8 @@ stock_performance AS (
     JOIN stock_betas ON tsla_data.DATE = stock_betas.DATE
 )
 
-SELECT *
+
+SELECT
+    {{ dbt_utils.generate_surrogate_key(['date', 'stock_id']) }} AS surrogate_key,
+    *
 FROM stock_performance
