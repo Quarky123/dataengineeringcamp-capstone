@@ -1,13 +1,11 @@
 WITH latest_dates AS (
     SELECT
-        STOCK_ID,
-        MAX(DATE) AS max_date
-    FROM {{ ref('fact_daily_stock_performance') }}
-    GROUP BY STOCK_ID
+        *,
+        ROW_NUMBER() OVER (PARTITION BY STOCK_ID ORDER BY DATE DESC) as row_num
+    FROM {{ ref('dim_daily_stock_performance') }}
 )
 
 SELECT
-    t.*
-FROM table_name AS t
-JOIN latest_dates AS ld
-ON t.STOCK_ID = ld.STOCK_ID AND t.DATE = ld.max_date
+    *
+FROM latest_dates
+WHERE row_num = 1
