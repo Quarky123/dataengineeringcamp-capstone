@@ -6,7 +6,7 @@ WITH stock_data AS (
     DATE_TRUNC('month', date) AS month,
     AVG((daily_high + daily_low) / 2) AS avg_price,
     SUM(daily_volume) AS total_volume
-  FROM {{ ref('fact_stock_daily_data') }}
+  FROM {{ ref('dim_stock_daily_data') }}
   GROUP BY symbol, DATE_TRUNC('month', date)
 )
 
