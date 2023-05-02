@@ -1,0 +1,31 @@
+version: 2
+
+sources:
+  - name: src
+
+
+models:
+  - name: src_msft
+    columns:
+      - name: DATE
+        tests:
+          - unique
+          - not_null
+  - name: src_aapl
+    columns:
+      - name: DATE
+        tests:
+          - unique
+          - not_null
+  - name: src_tsla
+    columns:
+      - name: DATE
+        tests:
+          - unique
+          - not_null
+  - name: src_spy
+    columns:
+      - name: DATE
+        tests:
+          - unique
+          - not_null
