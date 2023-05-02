@@ -1,4 +1,3 @@
-
 import os
 from dotenv import load_dotenv
 # load environment variables from .env file
@@ -14,7 +13,7 @@ DB_NAME = os.getenv('DB_NAME')
 
 
 import alpaca_trade_api as tradeapi
-# import alpaca_trade_api 
+# import alpaca_trade_api
 
 from alpaca_trade_api.rest import REST, TimeFrame
 import pandas as pd
@@ -35,7 +34,7 @@ def individual_stock_bar(api_key_id,api_secret_key,stock_ticker):
     api = tradeapi.REST(api_key_id, api_secret_key, base_url, api_version='v2')
 
     # get today's date in UTC timezone
-    today = datetime.now(pytz.utc)- timedelta(days=1)
+    today = datetime.now(pytz.utc)- timedelta(days=3)
 
     # calculate the date one year from today's date in UTC timezone
     # i am just using 30 days for demonstration purposes, supposed to be 365 days
@@ -47,7 +46,7 @@ def individual_stock_bar(api_key_id,api_secret_key,stock_ticker):
 
     # get the AAPL stock bars for the specified date range
     return (api.get_bars(stock_ticker, TimeFrame.Day,  end_date, start_date,adjustment='raw').df)
-    
+
 # upsert
 def create_and_insert(stock_ticker, df):
     cur = conn.cursor()
@@ -75,7 +74,7 @@ def create_and_insert(stock_ticker, df):
         upsert_query = f"""
             INSERT INTO {stock_ticker} (date, open, high, low, close, volume)
             VALUES ('{index.date()}', {row['open']}, {row['high']}, {row['low']}, {row['close']}, {row['volume']})
-            ON CONFLICT (date) DO UPDATE 
+            ON CONFLICT (date) DO UPDATE
             SET open = excluded.open,
                 high = excluded.high,
                 low = excluded.low,
@@ -90,7 +89,7 @@ def create_and_insert(stock_ticker, df):
     # close the cursor and connection objects
     cur.close()
 
-# read the file txt 
+# read the file txt
 def read_stocks_file(file_path):
     with open(file_path, 'r') as f:
         lines = f.readlines()
