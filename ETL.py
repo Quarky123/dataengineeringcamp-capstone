@@ -34,7 +34,18 @@ def individual_stock_bar(api_key_id,api_secret_key,stock_ticker):
     api = tradeapi.REST(api_key_id, api_secret_key, base_url, api_version='v2')
 
     # get today's date in UTC timezone
-    today = datetime.now(pytz.utc)- timedelta(days=3)
+    today = datetime.now(pytz.utc)- timedelta(days=0)
+
+    # Calculate the timedelta based on the day of the week
+    day_of_week = today.strftime("%A")
+    # print(day_of_week)    
+    if day_of_week == 'Saturday': # Saturday
+        today = datetime.now(pytz.utc)- timedelta(days=2)
+    elif day_of_week == 'Sunday': # Sunday
+        today = datetime.now(pytz.utc)- timedelta(days=3)
+    else:
+        today = datetime.now(pytz.utc)- timedelta(days=1)
+
 
     # calculate the date one year from today's date in UTC timezone
     # i am just using 30 days for demonstration purposes, supposed to be 365 days
